@@ -34,15 +34,27 @@ export default class Add extends Component {
             formValues[name] = value;
         }
 
-        // console.log(formValues);
+        console.log(formValues);
+        if(name!=undefined){
+        this.setState({
+            formValues: formValues
+        });
+        }
+    }
 
+    getnamevalue(name){
+        let formValues = this.state.formValues;
+        formValues[name] = document.getElementsByName(name)[0].value;
         this.setState({
             formValues: formValues
         });
     }
 
     onSubmit(e) {
+        this.getnamevalue('ttl');
+        this.getnamevalue('jk');
         e.preventDefault();
+        console.log(this.state.formValues);
         var rr = new FormData();
         for (let [key, value] of Object.entries(this.state.formValues)) {
             if (key == "gambar") rr.append(key, value, value.name);
@@ -50,7 +62,7 @@ export default class Add extends Component {
         }
         // console.log(JSON.stringify(rr));
         axios
-            .post("http://127.0.0.1:8000/api/berita/store", rr)
+            .post("/api/penduduk/store", rr)
             .then(res =>
                 this.setState({
                     alert_message: "success"
@@ -146,25 +158,23 @@ export default class Add extends Component {
                                     <input
                                         className="form-control"
                                         type="text"
-                                        name="ttl"
+                                        name="tempatlahir"
                                         placeholder="Tempat Tanggal Lahir (TTL)"
-                                        value={this.state.formValues["ttl"]}
+                                        value={this.state.formValues["tempatlahir"]}
                                         onChange={this.handleChange.bind(this)}
                                     />
                                 </div>
                             </div>
                             <div className="form-group row">
                             <label
-                            class="col-sm-3">Tanggal bulan tahun lahir <small class="text-muted">dd/mm/yyyy</small></label>
+                            class="col-sm-3">Bulan Tanggal Tahun Lahir <small class="text-muted">dd/mm/yyyy</small></label>
                             <div class="col-sm-9">
-                                <input id="date-mask"
-                                    className="form-control date-inputmask"
-                                    type="text"
-                                    name="ttl"
-                                    placeholder="Tanggal Lahir"
-                                    value={this.state.formValues["ttl"]}
-                                    onChange={this.handleChange.bind(this)}
-                                />
+                            <div class="input-group">
+                            <input type="text" name="ttl" class="form-control" id="datepicker-autoclose" placeholder="mm/dd/yyyy"/>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
+                        </div>
                             </div>
                         </div>
                             <div className="form-group row">
@@ -175,14 +185,14 @@ export default class Add extends Component {
                                     Jenis Kelamin
                                 </label>
                                 <div class="col-sm-9">
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        name="jk"
-                                        placeholder="Jenis Kelamin"
-                                        value={this.state.formValues["jk"]}
-                                        onChange={this.handleChange.bind(this)}
-                                    />
+                                    <select name="jk" class="select2 form-control custom-select" style={{
+                                        width: 100 + "%",
+                                        height: 36 + "px"
+                                    }}>
+                                            <option>Pilih</option>
+                                            <option value="Pria">Pria</option>
+                                            <option value="Wanita">Wanita</option>
+                                    </select>
                                 </div>
                             </div>
                             <div className="form-group row">
@@ -251,7 +261,7 @@ export default class Add extends Component {
                                         className="form-control"
                                         type="text"
                                         name="perkawinan"
-                                        placeholder="Menikah / Sudah menikah"
+                                        placeholder="Belum Menikah / Menikah / Sudah menikah"
                                         value={this.state.formValues["perkawinan"]}
                                         onChange={this.handleChange.bind(this)}
                                     />
@@ -373,6 +383,9 @@ export default class Add extends Component {
                         </div>
                     </form>
                 </div>
+                {/*} This Page JS */}
+
+
             </>
         );
     }

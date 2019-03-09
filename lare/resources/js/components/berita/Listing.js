@@ -16,7 +16,7 @@ export default class Listing extends Component {
 
 	componentDidMount()
 	{
-		axios.get('http://127.0.0.1:8000/api/berita')
+		axios.get('/api/berita')
 		.then(response=>{
             console.log(response.data);
             this.setState({news:response.data});
@@ -25,7 +25,7 @@ export default class Listing extends Component {
 
     onDelete(berita_id)
     {
-        axios.delete('http://127.0.0.1:8000/api/berita/delete/'+berita_id)
+        axios.delete('/api/berita/delete/'+berita_id)
         .then(
             response=>{
             var news = this.state.news;

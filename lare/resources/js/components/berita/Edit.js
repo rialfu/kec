@@ -18,11 +18,13 @@ export default class Edit extends Component {
 
 	componentDidMount()
 	{
-        axios.get('http://127.0.0.1:8000/api/berita/edit/'+this.props.match.params.id)
+        axios.get('/api/berita/edit/'+this.props.match.params.id)
 		.then(response=>{
-            console.log(response.data.message);
+            console.log(response.data);
             if(response.data.message == "success"){
                 this.setState({formValues:response.data});
+                document.querySelectorAll('.ql-editor')[0].innerHTML =
+                this.state.formValues["isi"]
             }else if(response.data.message == "notfound"){
                 this.props.history.push('/berita');
             }
@@ -59,8 +61,17 @@ export default class Edit extends Component {
         console.log(typeof(formValues.foto));
     }
 
+    getinner(name,kelas){
+        let value = document.querySelectorAll(kelas)[0].innerHTML;
+        let formValues = this.state.formValues;
+        formValues[name] = value;
+        this.setState({
+            formValues:formValues
+        });
+    }
     onSubmit(e){
         e.preventDefault();
+        this.getinner('isi','.ql-editor');
         var rr = new FormData();
         console.log(this.state.formValues);
         for(let [key, value] of Object.entries(this.state.formValues)){
@@ -72,7 +83,7 @@ export default class Edit extends Component {
         }
         // rr.append('kunci','isi');
         // rr.append('_method', 'PATCH');
-        axios.post('http://127.0.0.1:8000/api/berita/update/'+this.props.match.params.id,rr)
+        axios.post('/api/berita/update/'+this.props.match.params.id,rr)
         .then(
             res=>{
                 this.setState({
@@ -108,13 +119,11 @@ export default class Edit extends Component {
                 </div>
               </div>
               <div className="form-group">
+
               <label for="exampleFormControlTextarea1">Artikel</label>
-                <textarea
-                className="form-control"
-                name="isi"
-                    placeholder="Judul berita"
-                    value={this.state.formValues["isi"]}
-                    onChange={this.handleChange.bind(this)} rows="3"/>
+                    <div id="editor" style={{height: 200+"px"}}>
+
+                    </div>
             </div>
             <div className="form-group row">
             <label for="exampleFormControlFile1" class="col-sm-3 control-label col-form-label">Thumbnail berita</label>

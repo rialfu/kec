@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Home from './Home';
 import About from './About';
-import Category from './category/Index';
 import Berita from './berita/Index';
 import Penduduk from './penduduk/Index';
 import {Link, Route} from 'react-router-dom';
@@ -108,9 +107,6 @@ export default class Header extends Component {
                     <div className="col-md-12">
                         <Route exact path="/" component={Home}></Route>
                         <Route exact path="/about" component={About}></Route>
-                        <Route exact path="/category" component={Category}></Route>
-                        <Route exact path="/category/add" component={Category}></Route>
-                        <Route exact path="/category/edit/:id" component={Category}></Route>
                         <Route exact path="/dashboard/berita" component={Berita}></Route>
                         <Route exact path="/dashboard/berita/add" component={Berita}></Route>
                         <Route exact path="/dashboard/berita/edit/:id" component={Berita}></Route>
