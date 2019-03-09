@@ -94,10 +94,10 @@ class BeritaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        info($request);
+        // info($request);
         $berita = Berita::find($id);
         $berita->judul = $request->judul;
-        $berita->isi == $request->isi;
+        $berita->isi = $request->isi;
         if(!is_object($request->foto)){
             $newName = $request->foto;
         }else{

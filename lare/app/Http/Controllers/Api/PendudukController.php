@@ -35,7 +35,7 @@ class PendudukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        info($request);
     }
 
     /**
