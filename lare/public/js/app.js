@@ -65412,7 +65412,12 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Link"], {
         className: "nav-link",
         to: "/dashboard/berita"
-      }, "Berita")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
+      }, "Berita")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "nav-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Link"], {
+        className: "nav-link",
+        to: "/dashboard/penduduk"
+      }, "Penduduk")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("aside", {
         class: "left-sidebar",
         "data-sidebarbg": "skin5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -66588,7 +66593,7 @@ function (_Component) {
     value: function render() {
       var _this4 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "card"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "card-body"
@@ -66596,7 +66601,56 @@ function (_Component) {
         message: "Berita deleted successfully."
       }) : null, this.state.alert_message == "error" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ErrorAlert__WEBPACK_IMPORTED_MODULE_4__["default"], {
         message: "Error occured while deleting the berita."
-      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        class: "card-title"
+      }, "Latest Posts")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "comment-widgets scrollable"
+      }, this.state.news.map(function (berita) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          class: "d-flex flex-row comment-row"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          class: "p-2"
+        }, berita.foto == null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: "/matrix/assets/images/users/1.jpg",
+          alt: "user",
+          width: "50",
+          class: "rounded-circle"
+        }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          alt: "user",
+          width: "50",
+          class: "rounded-circle",
+          src: "/uploads/file/" + berita.foto,
+          style: {
+            width: 50,
+            height: 50
+          }
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          class: "comment-text w-100"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+          class: "font-medium"
+        }, berita.judul), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          class: "m-b-15 d-block"
+        }, berita.isi), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          class: "comment-footer"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          class: "text-muted float-right"
+        }, berita.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          class: "btn btn-cyan btn-sm"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: '/dashboard/berita/edit/' + berita.id
+        }, "Edit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          class: "btn btn-danger btn-sm"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "#",
+          onClick: _this4.onDelete.bind(_this4, berita.id)
+        }, "Delete")))));
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         class: "card-title"
       }, "Berita"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "table-responsive"
@@ -66616,7 +66670,7 @@ function (_Component) {
           href: "#",
           onClick: _this4.onDelete.bind(_this4, berita.id)
         }, "Delete")));
-      }))))));
+      })))))));
     }
   }]);
 
@@ -67534,7 +67588,7 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/berita').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/penduduk').then(function (response) {
         console.log(response.data);
 
         _this2.setState({
@@ -67544,14 +67598,14 @@ function (_Component) {
     }
   }, {
     key: "onDelete",
-    value: function onDelete(berita_id) {
+    value: function onDelete(penduduk_id) {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete('/api/berita/delete/' + berita_id).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete('/api/penduduk/delete/' + penduduk_id).then(function (response) {
         var news = _this3.state.news;
 
         for (var i = 0; i < news.length; i++) {
-          if (news[i].id == berita_id) {
+          if (news[i].id == penduduk_id) {
             news.splice(i, 1);
 
             _this3.setState({
@@ -67579,28 +67633,28 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "card-body"
       }, this.state.alert_message == "success" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SuccessAlert__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        message: "Berita deleted successfully."
+        message: "penduduk deleted successfully."
       }) : null, this.state.alert_message == "error" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ErrorAlert__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        message: "Error occured while deleting the berita."
+        message: "Error occured while deleting the penduduk."
       }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         class: "card-title"
-      }, "Berita"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "penduduk"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "table-responsive"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         id: "zero_config",
         className: "table table-striped table-bordered"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "#"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Judul"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Isi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Foto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Created At"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Updated At"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.state.news.map(function (berita) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, "1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, berita.judul), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, berita.isi), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, berita.foto == '' ? "Tidak ada thumbnail" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: "/uploads/file/" + berita.foto,
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Nama"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Nik"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Foto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Tempat Lahir"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Tanggal Lahir"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Jenis Kelamin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Golongan Darah"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Agama"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Alamat"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Warga"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Pekerjaan"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ayah"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ibu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.state.news.map(function (penduduk) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.nama), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.nik), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.foto == '' ? "Tidak ada thumbnail" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: "/uploads/file/" + penduduk.foto,
           style: {
             width: 150 + 'px',
             height: 150 + 'px'
           }
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, berita.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, berita.updated_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-          to: '/berita/edit/' + berita.id
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.tempatlahir), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.ttl), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.jk), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.goldar), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.agama), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.alamat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.warga), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.pekerjaan), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.ayah), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.ibu), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: '/penduduk/edit/' + penduduk.id
         }, "Edit | "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: "#",
-          onClick: _this4.onDelete.bind(_this4, berita.id)
+          onClick: _this4.onDelete.bind(_this4, penduduk.id)
         }, "Delete")));
       }))))));
     }
@@ -67691,8 +67745,8 @@ function (_Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\lare\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\lare\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\kec\lare\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\kec\lare\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

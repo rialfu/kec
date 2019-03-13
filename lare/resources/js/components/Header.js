@@ -41,6 +41,9 @@ export default class Header extends Component {
                   <li className="nav-item">
                     <Link className="nav-link" to="/dashboard/berita">Berita</Link>
                   </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/dashboard/penduduk">Penduduk</Link>
+                  </li>
                 </ul>
               </div>
             </nav>
