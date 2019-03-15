@@ -47,16 +47,9 @@ class BeritaController extends Controller
             $berita->foto = $newName;
         }
 
-        // $berita->user_id = 1;
-        // $berita->user_update = 1;
-        // $berita->judul = $request->judul;
-        // $berita->isi = $request->isi;
-        $berita->fill([
-            'user_id' => 1,
-            'user_update' => 1,
-            'judul' => $request->judul,
-            'isi' => $request->isi
-        ]);
+
+        $berita->judul = $request->judul;
+        $berita->isi = $request->isi;
         $berita->save();
 
 
@@ -101,7 +94,10 @@ class BeritaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        info($request);
         $berita = Berita::find($id);
+        $berita->judul = $request->judul;
+        $berita->isi == $request->isi;
         if(!is_object($request->foto)){
             $newName = $request->foto;
         }else{
@@ -116,12 +112,7 @@ class BeritaController extends Controller
             }
             $request->foto->move('uploads/file',$newName);
         }
-        $berita->fill([
-            'user_update' => 1,
-            'judul' => $request->judul,
-            'isi' => $request->isi,
-            'foto' => $newName
-        ]);
+        $berita->foto = $newName;
         $berita->save();
     }
 

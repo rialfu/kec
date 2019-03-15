@@ -18,7 +18,7 @@ export default class Edit extends Component {
 
 	componentDidMount()
 	{
-        axios.get('/api/berita/edit/'+this.props.match.params.id)
+        axios.get('http://127.0.0.1:8000/api/berita/edit/'+this.props.match.params.id)
 		.then(response=>{
             console.log(response.data.message);
             if(response.data.message == "success"){
@@ -72,7 +72,7 @@ export default class Edit extends Component {
         }
         // rr.append('kunci','isi');
         // rr.append('_method', 'PATCH');
-        axios.post('/api/berita/update/'+this.props.match.params.id,rr)
+        axios.post('http://127.0.0.1:8000/api/berita/update/'+this.props.match.params.id,rr)
         .then(
             res=>{
                 this.setState({
