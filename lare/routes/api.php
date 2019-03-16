@@ -41,3 +41,9 @@ Route::post('berita/store','Api\BeritaController@store');
 Route::delete('berita/delete/{id}','Api\BeritaController@destroy');
 Route::get('berita/edit/{id}','Api\BeritaController@edit');
 Route::post('berita/update/{id}','Api\BeritaController@update');
+
+Route::get('penduduk','Api\PendudukController@Index');
+Route::post('penduduk/store','Api\PendudukController@store');
+Route::delete('penduduk/delete/{id}','Api\PendudukController@destroy');
+Route::get('penduduk/edit/{id}','Api\PendudukController@edit');
+Route::post('penduduk/update/{id}','Api\PendudukController@update');
