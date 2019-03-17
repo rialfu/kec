@@ -47,7 +47,9 @@ export default class Add extends Component {
 
     onSubmit(e){
         e.preventDefault();
+        this.getinner('isi','.ql-editor');
         var rr = new FormData();
+        console.log(this.state.formValues);
         for(let [key, value] of Object.entries(this.state.formValues)){
             if(key=="gambar")
             rr.append(key,value,value.name);
@@ -55,7 +57,7 @@ export default class Add extends Component {
             rr.append(key,value);
         }
         // console.log(JSON.stringify(rr));
-        axios.post('http://127.0.0.1:8000/api/berita/store',rr)
+        axios.post('/api/berita/store',rr)
         .then(
             res=>{
                 this.setState({
@@ -69,6 +71,15 @@ export default class Add extends Component {
                 });
             }
         );
+    }
+
+    getinner(name,kelas){
+        let value = document.querySelectorAll(kelas)[0].innerHTML;
+        let formValues = this.state.formValues;
+        formValues[name] = value;
+        this.setState({
+            formValues:formValues
+        });
     }
 
     render() {
@@ -92,12 +103,9 @@ export default class Add extends Component {
               </div>
               <div className="form-group">
               <label for="exampleFormControlTextarea1">Artikel</label>
-                <textarea
-                className="form-control"
-                name="isi"
-                    placeholder="Artikel"
-                    value={this.state.formValues["isi"]}
-                    onChange={this.handleChange.bind(this)} rows="3"/>
+
+                    <div id="editor" style={{height: 200+"px"}}>
+                    </div>
             </div>
             <div className="form-group row">
             <label for="exampleFormControlFile1" class="col-sm-3 control-label col-form-label">Thumbnail berita</label>
