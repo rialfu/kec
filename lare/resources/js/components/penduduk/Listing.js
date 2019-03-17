@@ -66,7 +66,7 @@ export default class Listing extends Component {
 
     render() {
         let filteredJson = this.state.news.filter(data => {
-            return data.nama.indexOf(this.state.search) !== -1;
+            return data.nama.indexOf(this.state.search) !== -1 || data.nik.indexOf(this.state.search) !== -1;
           }
         );
         return (
