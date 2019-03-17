@@ -103,8 +103,8 @@ export default class Edit extends Component {
         return (
             <>
             <div class="card-body">
-            {this.state.alert_message=="success"?<SuccessAlert message={"Category added successfully."} />:null}
-            {this.state.alert_message=="error"?<ErrorAlert message={"Error occured while adding the berita."} />:null}
+            {this.state.alert_message=="success"?<SuccessAlert message={"Category updated successfully."} />:null}
+            {this.state.alert_message=="error"?<ErrorAlert message={"Error occured while updating the berita."} />:null}
             </div>
             <div class="card">
             <form class="form-horizontal" onSubmit={this.onSubmit}>
