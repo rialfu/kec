@@ -67746,7 +67746,7 @@ function (_Component) {
       var _this4 = this;
 
       var filteredJson = this.state.news.filter(function (data) {
-        return data.nama.indexOf(_this4.state.search) !== -1;
+        return data.nama.indexOf(_this4.state.search) !== -1 || data.nik.indexOf(_this4.state.search) !== -1;
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "card"
