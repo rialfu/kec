@@ -10,7 +10,8 @@ export default class Listing extends Component {
 		super();
 		this.state = {
             news:[],
-            alert_message:''
+            alert_message:'',
+            search: ''
         }
 	}
 
@@ -59,11 +60,20 @@ export default class Listing extends Component {
         }
     );
     }
+    updateSearch(event){
+        this.setState({search: event.target.value.substr(0, 20)});
+      }
 
     render() {
+        let filteredJson = this.state.news.filter(data => {
+            return data.nama.indexOf(this.state.search) !== -1;
+          }
+        );
         return (
             <div class="card">
-            <input type="text" className="form-control form-control-lg" placeholder="Search" onChange={this.filterList.bind(this)}/>
+            <input type="text" className="form-control form-control-lg" placeholder="Search"
+            value={this.state.search}
+            onChange={this.updateSearch.bind(this)}/>
             <div class="card-body">
             {this.state.alert_message=="success"?<SuccessAlert message={"penduduk deleted successfully."} />:null}
             {this.state.alert_message=="error"?<ErrorAlert message={"Error occured while deleting the penduduk."} />:null}
@@ -91,7 +101,7 @@ export default class Listing extends Component {
 			  <tbody>
 			  	{
 
-			  		this.state.news.map((penduduk)=>{
+                    filteredJson.map((penduduk)=>{
 			  			return(
 				  			<tr>
                               <td>{penduduk.nama}</td>
