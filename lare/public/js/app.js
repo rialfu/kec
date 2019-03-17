@@ -67673,7 +67673,8 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Listing).call(this));
     _this.state = {
       news: [],
-      alert_message: ''
+      alert_message: '',
+      search: ''
     };
     return _this;
   }
@@ -67733,17 +67734,28 @@ function (_Component) {
       });
     }
   }, {
+    key: "updateSearch",
+    value: function updateSearch(event) {
+      this.setState({
+        search: event.target.value.substr(0, 20)
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this4 = this;
 
+      var filteredJson = this.state.news.filter(function (data) {
+        return data.nama.indexOf(_this4.state.search) !== -1;
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "card"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "form-control form-control-lg",
         placeholder: "Search",
-        onChange: this.filterList.bind(this)
+        value: this.state.search,
+        onChange: this.updateSearch.bind(this)
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "card-body"
       }, this.state.alert_message == "success" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SuccessAlert__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -67757,7 +67769,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         id: "zero_config",
         className: "table table-striped table-bordered"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Nama"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Nik"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Foto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Tempat Lahir"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Tanggal Lahir"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Jenis Kelamin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Golongan Darah"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Agama"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Alamat"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Warga"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Pekerjaan"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ayah"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ibu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.state.news.map(function (penduduk) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Nama"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Nik"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Foto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Tempat Lahir"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Tanggal Lahir"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Jenis Kelamin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Golongan Darah"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Agama"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Alamat"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Warga"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Pekerjaan"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ayah"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ibu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, filteredJson.map(function (penduduk) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.nama), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.nik), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.foto == '' ? "Tidak ada thumbnail" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: "/uploads/file/" + penduduk.foto,
           style: {
