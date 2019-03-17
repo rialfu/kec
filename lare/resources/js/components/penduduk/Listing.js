@@ -66,7 +66,7 @@ export default class Listing extends Component {
 
     render() {
         let filteredJson = this.state.news.filter(data => {
-            return data.nama.indexOf(this.state.search) !== -1 || data.nik.indexOf(this.state.search) !== -1;
+            return data.nama.toLocaleLowerCase().indexOf(this.state.search.toLocaleLowerCase()) > -1 || data.nik.indexOf(this.state.search.toLocaleLowerCase()) > -1;
           }
         );
         return (
@@ -118,7 +118,7 @@ export default class Listing extends Component {
                               <td>{penduduk.ayah}</td>
                               <td>{penduduk.ibu}</td>
                               <td>
-                                    <Link to={'/penduduk/edit/'+penduduk.id}>Edit | </Link>
+                                    <Link to={'/dashboard/penduduk/edit/'+penduduk.id}>Edit | </Link>
                                     <a href="#" onClick={this.onDelete.bind(this,penduduk.id)}>Delete</a></td>
 						    </tr>
 					    )

@@ -66154,7 +66154,9 @@ function (_Component) {
       var _this3 = this;
 
       e.preventDefault();
+      this.getinner('isi', '.ql-editor');
       var rr = new FormData();
+      console.log(this.state.formValues);
 
       var _arr = Object.entries(this.state.formValues);
 
@@ -66167,7 +66169,7 @@ function (_Component) {
       } // console.log(JSON.stringify(rr));
 
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/berita/store', rr).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/berita/store', rr).then(function (res) {
         _this3.setState({
           alert_message: "success"
         });
@@ -66175,6 +66177,16 @@ function (_Component) {
         _this3.setState({
           alert_message: "error"
         });
+      });
+    }
+  }, {
+    key: "getinner",
+    value: function getinner(name, kelas) {
+      var value = document.querySelectorAll(kelas)[0].innerHTML;
+      var formValues = this.state.formValues;
+      formValues[name] = value;
+      this.setState({
+        formValues: formValues
       });
     }
   }, {
@@ -66211,13 +66223,11 @@ function (_Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         for: "exampleFormControlTextarea1"
-      }, "Artikel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-        className: "form-control",
-        name: "isi",
-        placeholder: "Artikel",
-        value: this.state.formValues["isi"],
-        onChange: this.handleChange.bind(this),
-        rows: "3"
+      }, "Artikel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "editor",
+        style: {
+          height: 200 + "px"
+        }
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -66331,13 +66341,15 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8000/api/berita/edit/' + this.props.match.params.id).then(function (response) {
-        console.log(response.data.message);
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/berita/edit/' + this.props.match.params.id).then(function (response) {
+        console.log(response.data);
 
         if (response.data.message == "success") {
           _this2.setState({
             formValues: response.data
           });
+
+          document.querySelectorAll('.ql-editor')[0].innerHTML = _this2.state.formValues["isi"];
         } else if (response.data.message == "notfound") {
           _this2.props.history.push('/berita');
         }
@@ -66381,11 +66393,22 @@ function (_Component) {
       console.log(_typeof(formValues.foto));
     }
   }, {
+    key: "getinner",
+    value: function getinner(name, kelas) {
+      var value = document.querySelectorAll(kelas)[0].innerHTML;
+      var formValues = this.state.formValues;
+      formValues[name] = value;
+      this.setState({
+        formValues: formValues
+      });
+    }
+  }, {
     key: "onSubmit",
     value: function onSubmit(e) {
       var _this4 = this;
 
       e.preventDefault();
+      this.getinner('isi', '.ql-editor');
       var rr = new FormData();
       console.log(this.state.formValues);
 
@@ -66405,7 +66428,7 @@ function (_Component) {
       // rr.append('_method', 'PATCH');
 
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://127.0.0.1:8000/api/berita/update/' + this.props.match.params.id, rr).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/berita/update/' + this.props.match.params.id, rr).then(function (res) {
         _this4.setState({
           alert_message: "success"
         });
@@ -66449,13 +66472,11 @@ function (_Component) {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         for: "exampleFormControlTextarea1"
-      }, "Artikel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-        className: "form-control",
-        name: "isi",
-        placeholder: "Judul berita",
-        value: this.state.formValues["isi"],
-        onChange: this.handleChange.bind(this),
-        rows: "3"
+      }, "Artikel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "editor",
+        style: {
+          height: 200 + "px"
+        }
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -66697,7 +66718,7 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('http://127.0.0.1:8000/api/berita').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/berita').then(function (response) {
         console.log(response.data);
 
         _this2.setState({
@@ -66710,7 +66731,7 @@ function (_Component) {
     value: function onDelete(berita_id) {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete('http://127.0.0.1:8000/api/berita/delete/' + berita_id).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.delete('/api/berita/delete/' + berita_id).then(function (response) {
         var news = _this3.state.news;
 
         for (var i = 0; i < news.length; i++) {
@@ -66737,7 +66758,7 @@ function (_Component) {
     value: function render() {
       var _this4 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "card"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "card-body"
@@ -66745,7 +66766,56 @@ function (_Component) {
         message: "Berita deleted successfully."
       }) : null, this.state.alert_message == "error" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ErrorAlert__WEBPACK_IMPORTED_MODULE_4__["default"], {
         message: "Error occured while deleting the berita."
-      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+      }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        class: "card-title"
+      }, "Latest Posts")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "comment-widgets scrollable"
+      }, this.state.news.map(function (berita) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          class: "d-flex flex-row comment-row"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          class: "p-2"
+        }, berita.foto == null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: "/matrix/assets/images/users/1.jpg",
+          alt: "user",
+          width: "50",
+          class: "rounded-circle"
+        }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          alt: "user",
+          width: "50",
+          class: "rounded-circle",
+          src: "/uploads/file/" + berita.foto,
+          style: {
+            width: 50,
+            height: 50
+          }
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          class: "comment-text w-100"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+          class: "font-medium"
+        }, berita.judul), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          class: "m-b-15 d-block"
+        }, berita.isi), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          class: "comment-footer"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          class: "text-muted float-right"
+        }, berita.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          class: "btn btn-cyan btn-sm"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: '/dashboard/berita/edit/' + berita.id
+        }, "Edit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          type: "button",
+          class: "btn btn-danger btn-sm"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "#",
+          onClick: _this4.onDelete.bind(_this4, berita.id)
+        }, "Delete")))));
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         class: "card-title"
       }, "Berita"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "table-responsive"
@@ -66765,7 +66835,7 @@ function (_Component) {
           href: "#",
           onClick: _this4.onDelete.bind(_this4, berita.id)
         }, "Delete")));
-      }))))));
+      })))))));
     }
   }]);
 
@@ -67261,6 +67331,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _SuccessAlert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SuccessAlert */ "./resources/js/components/penduduk/SuccessAlert.js");
 /* harmony import */ var _ErrorAlert__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ErrorAlert */ "./resources/js/components/penduduk/ErrorAlert.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -67268,8 +67340,6 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -67317,16 +67387,12 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/berita/edit/' + this.props.match.params.id).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/penduduk/edit/' + this.props.match.params.id).then(function (response) {
         console.log(response.data.message);
 
-        if (response.data.message == "success") {
-          _this2.setState({
-            formValues: response.data
-          });
-        } else if (response.data.message == "notfound") {
-          _this2.props.history.push('/berita');
-        }
+        _this2.setState({
+          formValues: response.data
+        });
       }).catch(function (error) {
         console.log("GA ADA");
       });
@@ -67338,42 +67404,54 @@ function (_Component) {
 
       event.preventDefault();
       var formValues = this.state.formValues;
+      var formData = this.formData;
       var name = event.target.name;
       var value;
 
-      if (name == "foto" && event.target.files[0] != null) {
+      if (name == "gambar") {
         var reader = new FileReader();
         value = event.target.files[0];
 
         reader.onloadend = function () {
-          _this3.setState({
+          return _this3.setState({
             imagePreviewUrl: reader.result
           });
         };
 
         reader.readAsDataURL(value);
         formValues[name] = value;
-      } else if (name == "foto" && event.target.files[0] == null) {
-        value = this.state.formValues.foto;
-        formValues[name] = value;
       } else {
         value = event.target.value;
         formValues[name] = value;
       }
 
+      console.log(formValues);
+
+      if (name != undefined) {
+        this.setState({
+          formValues: formValues
+        });
+      }
+    }
+  }, {
+    key: "getnamevalue",
+    value: function getnamevalue(name) {
+      var formValues = this.state.formValues;
+      formValues[name] = document.getElementsByName(name)[0].value;
       this.setState({
         formValues: formValues
       });
-      console.log(_typeof(formValues.foto));
     }
   }, {
     key: "onSubmit",
     value: function onSubmit(e) {
       var _this4 = this;
 
+      this.getnamevalue('ttl');
+      this.getnamevalue('jk');
       e.preventDefault();
-      var rr = new FormData();
       console.log(this.state.formValues);
+      var rr = new FormData();
 
       var _arr = Object.entries(this.state.formValues);
 
@@ -67382,21 +67460,16 @@ function (_Component) {
             key = _arr$_i[0],
             value = _arr$_i[1];
 
-        if (key == "gambar") {
-          rr.append(key, value, value.name);
-        } else {
-          rr.append(key, value);
-        }
-      } // rr.append('kunci','isi');
-      // rr.append('_method', 'PATCH');
+        if (key == "gambar") rr.append(key, value, value.name);else rr.append(key, value);
+      } // console.log(JSON.stringify(rr));
 
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/berita/update/' + this.props.match.params.id, rr).then(function (res) {
-        _this4.setState({
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/penduduk/update" + this.props.match.params.id, rr).then(function (res) {
+        return _this4.setState({
           alert_message: "success"
         });
       }).catch(function (error) {
-        _this4.setState({
+        return _this4.setState({
           alert_message: "error"
         });
       });
@@ -67420,53 +67493,570 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        for: "judul",
+        for: "nama",
         class: "col-sm-3 control-label col-form-label"
-      }, "Judul"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Nama"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "col-sm-9"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
         type: "text",
-        name: "judul",
-        placeholder: "Judul berita",
-        value: this.state.formValues["judul"],
+        name: "nama",
+        placeholder: "Nama",
+        value: this.state.formValues["nama"],
         onChange: this.handleChange.bind(this)
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group"
+        className: "form-group row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        for: "exampleFormControlTextarea1"
-      }, "Artikel"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        for: "nik",
+        class: "col-sm-3 control-label col-form-label"
+      }, "NIK"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
-        name: "isi",
-        placeholder: "Judul berita",
-        value: this.state.formValues["isi"],
-        onChange: this.handleChange.bind(this),
-        rows: "3"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        type: "text",
+        name: "nik",
+        placeholder: "NIK",
+        value: this.state.formValues["nik"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "kk",
+        class: "col-sm-3 control-label col-form-label"
+      }, "No. KK"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "kk",
+        placeholder: "No. KK",
+        value: this.state.formValues["kk"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "ttl",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Tempat Lahir (TTL)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "tempatlahir",
+        placeholder: "Tempat Tanggal Lahir (TTL)",
+        value: this.state.formValues["tempatlahir"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        class: "col-sm-3"
+      }, "Bulan Tanggal Tahun Lahir ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+        class: "text-muted"
+      }, "dd/mm/yyyy")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "input-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "ttl",
+        class: "form-control",
+        id: "datepicker-autoclose",
+        placeholder: "mm/dd/yyyy"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "input-group-append"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        class: "input-group-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        class: "fa fa-calendar"
+      })))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "jk",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Jenis Kelamin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        name: "jk",
+        class: "select2 form-control custom-select",
+        style: {
+          width: 100 + "%",
+          height: 36 + "px"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Pilih"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "Pria"
+      }, "Pria"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "Wanita"
+      }, "Wanita")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "goldar",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Golongan Darah"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "goldar",
+        placeholder: "Golongan Darah",
+        value: this.state.formValues["goldar"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "agama",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Agama"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "agama",
+        placeholder: "Agama",
+        value: this.state.formValues["agama"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "alamat",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Alamat"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "alamat",
+        placeholder: "Alamat",
+        value: this.state.formValues["alamat"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "perkawinan",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Status perkawinan"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "perkawinan",
+        placeholder: "Belum Menikah / Menikah / Sudah menikah",
+        value: this.state.formValues["perkawinan"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "warga",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Warga Negara"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "warga",
+        placeholder: "Warga Negara",
+        value: this.state.formValues["warga"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "pekerjaan",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Pekerjaan"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "pekerjaan",
+        placeholder: "Pekerjaan",
+        value: this.state.formValues["pekerjaan"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "ayah",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Nama Ayah"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "ayah",
+        placeholder: "Nama Ayah",
+        value: this.state.formValues["ayah"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "ibu",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Nama Ibu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "ibu",
+        placeholder: "Nama Ibu",
+        value: this.state.formValues["ibu"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         for: "exampleFormControlFile1",
         class: "col-sm-3 control-label col-form-label"
-      }, "Thumbnail berita"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Foto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "col-md-9"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "custom-file"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
-        name: "foto",
-        class: "form-control-file",
+        name: "gambar",
+        class: "custom-file-input",
         onChange: this.handleChange.bind(this),
-        id: "validatedCustomFile"
+        id: "validatedCustomFile",
+        required: ""
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         class: "custom-file-label",
         for: "validatedCustomFile"
       }, "Choose file..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "invalid-feedback"
       }, "Example invalid custom file feedback")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: this.state.imagePreviewUrl == null ? "/uploads/file/" + this.state.formValues["foto"] : this.state.imagePreviewUrl,
+        src: this.state.imagePreviewUrl,
         style: {
-          width: 150 + 'px',
-          height: 150 + 'px'
+          width: 150 + "px",
+          height: 150 + "px"
+        }
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary"
+      }, "Submit")))));
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(event) {
+      var _this5 = this;
+
+      event.preventDefault();
+      var formValues = this.state.formValues;
+      var formData = this.formData;
+      var name = event.target.name;
+      var value;
+
+      if (name == "gambar") {
+        var reader = new FileReader();
+        value = event.target.files[0];
+
+        reader.onloadend = function () {
+          return _this5.setState({
+            imagePreviewUrl: reader.result
+          });
+        };
+
+        reader.readAsDataURL(value);
+        formValues[name] = value;
+      } else {
+        value = event.target.value;
+        formValues[name] = value;
+      }
+
+      console.log(formValues);
+
+      if (name != undefined) {
+        this.setState({
+          formValues: formValues
+        });
+      }
+    }
+  }, {
+    key: "getnamevalue",
+    value: function getnamevalue(name) {
+      var formValues = this.state.formValues;
+      formValues[name] = document.getElementsByName(name)[0].value;
+      this.setState({
+        formValues: formValues
+      });
+    }
+  }, {
+    key: "onSubmit",
+    value: function onSubmit(e) {
+      var _this6 = this;
+
+      this.getnamevalue('ttl');
+      this.getnamevalue('jk');
+      e.preventDefault();
+      console.log(this.state.formValues);
+      var rr = new FormData();
+
+      var _arr2 = Object.entries(this.state.formValues);
+
+      for (var _i2 = 0; _i2 < _arr2.length; _i2++) {
+        var _arr2$_i = _slicedToArray(_arr2[_i2], 2),
+            key = _arr2$_i[0],
+            value = _arr2$_i[1];
+
+        if (key == "gambar") rr.append(key, value, value.name);else rr.append(key, value);
+      } // console.log(JSON.stringify(rr));
+
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/penduduk/store", rr).then(function (res) {
+        return _this6.setState({
+          alert_message: "success"
+        });
+      }).catch(function (error) {
+        return _this6.setState({
+          alert_message: "error"
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "card-body"
+      }, this.state.alert_message == "success" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SuccessAlert__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        message: "Category added successfully."
+      }) : null, this.state.alert_message == "error" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ErrorAlert__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        message: "Error occured while adding the berita."
+      }) : null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        class: "form-horizontal",
+        onSubmit: this.onSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "nama",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Nama"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "nama",
+        placeholder: "Nama",
+        value: this.state.formValues["nama"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "nik",
+        class: "col-sm-3 control-label col-form-label"
+      }, "NIK"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "nik",
+        placeholder: "NIK",
+        value: this.state.formValues["nik"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "kk",
+        class: "col-sm-3 control-label col-form-label"
+      }, "No. KK"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "kk",
+        placeholder: "No. KK",
+        value: this.state.formValues["kk"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "ttl",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Tempat Lahir (TTL)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "tempatlahir",
+        placeholder: "Tempat Tanggal Lahir (TTL)",
+        value: this.state.formValues["tempatlahir"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        class: "col-sm-3"
+      }, "Bulan Tanggal Tahun Lahir ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+        class: "text-muted"
+      }, "dd/mm/yyyy")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "input-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "ttl",
+        class: "form-control",
+        id: "datepicker-autoclose",
+        placeholder: "mm/dd/yyyy"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "input-group-append"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        class: "input-group-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        class: "fa fa-calendar"
+      })))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "jk",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Jenis Kelamin"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        name: "jk",
+        class: "select2 form-control custom-select",
+        style: {
+          width: 100 + "%",
+          height: 36 + "px"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Pilih"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "Pria"
+      }, "Pria"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "Wanita"
+      }, "Wanita")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "goldar",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Golongan Darah"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "goldar",
+        placeholder: "Golongan Darah",
+        value: this.state.formValues["goldar"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "agama",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Agama"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "agama",
+        placeholder: "Agama",
+        value: this.state.formValues["agama"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "alamat",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Alamat"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "alamat",
+        placeholder: "Alamat",
+        value: this.state.formValues["alamat"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "perkawinan",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Status perkawinan"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "perkawinan",
+        placeholder: "Belum Menikah / Menikah / Sudah menikah",
+        value: this.state.formValues["perkawinan"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "warga",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Warga Negara"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "warga",
+        placeholder: "Warga Negara",
+        value: this.state.formValues["warga"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "pekerjaan",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Pekerjaan"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "pekerjaan",
+        placeholder: "Pekerjaan",
+        value: this.state.formValues["pekerjaan"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "ayah",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Nama Ayah"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "ayah",
+        placeholder: "Nama Ayah",
+        value: this.state.formValues["ayah"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "ibu",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Nama Ibu"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-sm-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "ibu",
+        placeholder: "Nama Ibu",
+        value: this.state.formValues["ibu"],
+        onChange: this.handleChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        for: "exampleFormControlFile1",
+        class: "col-sm-3 control-label col-form-label"
+      }, "Foto"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "col-md-9"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "custom-file"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        name: "gambar",
+        class: "custom-file-input",
+        onChange: this.handleChange.bind(this),
+        id: "validatedCustomFile",
+        required: ""
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        class: "custom-file-label",
+        for: "validatedCustomFile"
+      }, "Choose file..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "invalid-feedback"
+      }, "Example invalid custom file feedback")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: this.state.imagePreviewUrl,
+        style: {
+          width: 150 + "px",
+          height: 150 + "px"
         }
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
@@ -67746,7 +68336,7 @@ function (_Component) {
       var _this4 = this;
 
       var filteredJson = this.state.news.filter(function (data) {
-        return data.nama.indexOf(_this4.state.search) !== -1 || data.nik.indexOf(_this4.state.search) !== -1;
+        return data.nama.toLocaleLowerCase().indexOf(_this4.state.search.toLocaleLowerCase()) > -1 || data.nik.indexOf(_this4.state.search.toLocaleLowerCase()) > -1;
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "card"
@@ -67777,7 +68367,7 @@ function (_Component) {
             height: 150 + 'px'
           }
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.tempatlahir), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.ttl), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.jk), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.goldar), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.agama), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.alamat), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.warga), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.pekerjaan), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.ayah), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, penduduk.ibu), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-          to: '/penduduk/edit/' + penduduk.id
+          to: '/dashboard/penduduk/edit/' + penduduk.id
         }, "Edit | "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: "#",
           onClick: _this4.onDelete.bind(_this4, penduduk.id)

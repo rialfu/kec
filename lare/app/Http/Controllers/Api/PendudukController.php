@@ -83,7 +83,15 @@ class PendudukController extends Controller
      */
     public function edit($id)
     {
-        //
+        $berita = Penduduk::find($id);
+        $data = array();
+        if($berita==null){
+            return response()->json(['message'=>'notfound']);
+        }else{
+            $data = $berita;
+            $data['message'] = 'success';
+            return json_encode($data);
+        }
     }
 
     /**
