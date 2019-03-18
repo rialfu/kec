@@ -102,25 +102,23 @@ class BeritaController extends Controller
     public function update(Request $request, $id)
     {
         $berita = Berita::find($id);
-        if(!is_object($request->foto)){
-            $newName = $request->foto;
-        }else{
+        if(is_object($request->foto)){
+            
             $ext = $request->foto->getClientOriginalExtension();
             $newName = rand(100000,1001238912).".".$ext;
+            $request->foto->move('uploads/file',$newName);
             $path = 'uploads/file/'.$berita->foto;
             @chown($path, 0777);
-            if (@unlink($path)) {
-                echo 'success';
-            } else {
-                echo 'fail';
-            }
-            $request->foto->move('uploads/file',$newName);
+            @unlink($path);
+            
+        }else{
+            $newName = $request->foto;
         }
+        $berita->foto = $newName;
         $berita->fill([
             'user_update' => 1,
             'judul' => $request->judul,
-            'isi' => $request->isi,
-            'foto' => $newName
+            'isi' => $request->isi
         ]);
         $berita->save();
     }

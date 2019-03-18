@@ -31,6 +31,9 @@
         <script src="/matrix/assets/libs/popper.js/dist/umd/popper.min.js"></script>
         <script src="/matrix/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/matrix/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+        <?php if (Request::is('dashboard/*'))
+                {
+                ?>
         <script src="/matrix/assets/extra-libs/sparkline/sparkline.js"></script>
         <!--Wave Effects -->
         <script src="/matrix/dist/js/waves.js"></script>
@@ -49,18 +52,19 @@
         <script src="/matrix/assets/libs/flot/jquery.flot.crosshair.js"></script>
         <script src="/matrix/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
         <script src="/matrix/dist/js/pages/chart/chart-page-init.js"></script>
+    <?php }?>
         <?php if (Request::is('dashboard/penduduk/*'))
                 {
                 ?>
         <!-- this page js -->
-        <!-- <script src="/matrix/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
+        <script src="/matrix/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
         <script src="/matrix/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
         <script src="/matrix/assets/extra-libs/DataTables/datatables.min.js"></script>
         <script>
             /****************************************
              *       Basic Table                   *
              ****************************************/
-            $('#zero_config').DataTable(); -->
+            $('#zero_config').DataTable();
         </script>
         <script src="/matrix/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
                 <script src="/matrix/dist/js/pages/mask/mask.init.js"></script>
@@ -169,6 +173,27 @@
             theme: 'snow'
         });
 
+    </script>
+<?php }else if (Request::is('login/')){?>
+        <!-- ============================================================== -->
+    <!-- This page plugin js -->
+    <!-- ============================================================== -->
+    <script>
+
+    $('[data-toggle="tooltip"]').tooltip();
+    $(".preloader").fadeOut();
+    // ============================================================== 
+    // Login and Recover Password 
+    // ============================================================== 
+    $('#to-recover').on("click", function() {
+        $("#loginform").slideUp();
+        $("#recoverform").fadeIn();
+    });
+    $('#to-login').click(function(){
+        
+        $("#recoverform").hide();
+        $("#loginform").fadeIn();
+    });
     </script>
 <?php } ?>
     </body>

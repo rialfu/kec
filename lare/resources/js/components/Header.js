@@ -4,7 +4,7 @@ import About from './About';
 import Berita from './berita/Index';
 import Penduduk from './penduduk/Index';
 import {Link, Route} from 'react-router-dom';
-import Login from './Login'
+
 
 export default class Header extends Component {
     render() {
@@ -117,7 +117,6 @@ export default class Header extends Component {
                         <Route exact path="/dashboard/penduduk" component={Penduduk}></Route>
                         <Route exact path="/dashboard/penduduk/add" component={Penduduk}></Route>
                         <Route exact path="/dashboard/penduduk/edit/:id" component={Penduduk}></Route>
-                        <Route exact path="/login" component={Login}></Route>
                     </div>
                 </div>
                 </div>

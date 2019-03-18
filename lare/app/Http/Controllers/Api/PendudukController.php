@@ -111,13 +111,10 @@ class PendudukController extends Controller
             $newName = rand(100000,1001238912).".".$ext;
             $path = 'uploads/file/'.$penduduk->foto;
             @chown($path, 0777);
-            if (@unlink($path)) {
-                echo 'success';
-            } else {
-                echo 'fail';
-            }
+            @unlink($path);
             $request->foto->move('uploads/file',$newName);
         }
+        $penduduk->foto = $newName;
         $penduduk->fill([
             'nama'=>$request->nama,
             'nik'=>$request->nik,
@@ -132,8 +129,7 @@ class PendudukController extends Controller
             'warga'=>$request->warga,
             'pekerjaan'=>$request->pekerjaan,
             'ayah'=>$request->ayah,
-            'ibu'=>$request->ibu,
-            'foto' => $newName
+            'ibu'=>$request->ibu
         ]);
         $penduduk->save();
     }
