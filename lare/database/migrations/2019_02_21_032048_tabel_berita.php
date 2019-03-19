@@ -15,12 +15,26 @@ class TabelBerita extends Migration
     {
         Schema::create('berita', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id');
+            $table->integer('user_id')->unsigned();
             $table->string('judul');
             $table->string('isi');
-            $table->string('user_update');
+            $table->integer('user_update')->unsigned()->nullable();
             $table->string('foto');
             $table->timestamps();
+            
+        });
+        Schema::table('berita', function (Blueprint $table){
+            $table->foreign('user_id') //id kelas
+                  ->references('id')    //dapat ref id
+                  ->on('users')         //dari tabel kelas
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+
+            $table->foreign('user_update') //id kelas
+                  ->references('id')    //dapat ref id
+                  ->on('users')         //dari tabel kelas
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
         });
     }
 
