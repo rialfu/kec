@@ -20,7 +20,7 @@ export default class Header extends Component {
 
                 </b>
                 <span class="logo-text">
-                     <img src="./matrix/assets/images/logo-text.png" alt="homepage" class="light-logo"/>
+                     <img src="/matrix/assets/images/logo-text.png" alt="homepage" class="light-logo"/>
 
                 </span>
             </a>

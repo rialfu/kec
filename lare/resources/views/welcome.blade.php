@@ -31,7 +31,7 @@
         <script src="/matrix/assets/libs/popper.js/dist/umd/popper.min.js"></script>
         <script src="/matrix/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/matrix/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-        <?php if (Request::is('dashboard/*'))
+        <?php if (Request::is('dashboard/*') || Request::is('dashboard/'))
                 {
                 ?>
         <script src="/matrix/assets/extra-libs/sparkline/sparkline.js"></script>
@@ -53,7 +53,7 @@
         <script src="/matrix/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
         <script src="/matrix/dist/js/pages/chart/chart-page-init.js"></script>
     <?php }?>
-        <?php if (Request::is('dashboard/penduduk/*'))
+        <?php if (Request::is('dashboard/penduduk/*') || Request::is('dashboard/penduduk'))
                 {
                 ?>
         <!-- this page js -->
@@ -119,7 +119,7 @@
                     });
                 </script>
                 <?php
-                }else  if (Request::is('dashboard/berita/*')){?>
+                }else  if (Request::is('dashboard/berita/') || Request::is('dashboard/berita/*')){?>
                     <!-- This Page JS -->
     <script src="/matrix/assets/libs/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
     <script src="/matrix/dist/js/pages/mask/mask.init.js"></script>
@@ -174,7 +174,7 @@
         });
 
     </script>
-<?php }else if (Request::is('login/')){?>
+<?php }else if (Request::is('login/') || Request::is('login/*')){?>
         <!-- ============================================================== -->
     <!-- This page plugin js -->
     <!-- ============================================================== -->

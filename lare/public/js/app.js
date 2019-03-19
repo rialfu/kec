@@ -65371,7 +65371,7 @@ function (_Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         class: "logo-text"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "./matrix/assets/images/logo-text.png",
+        src: "/matrix/assets/images/logo-text.png",
         alt: "homepage",
         class: "light-logo"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -66046,7 +66046,7 @@ function (_Component) {
         placeholder: "Username",
         "aria-label": "Username",
         "aria-describedby": "basic-addon1",
-        required: ""
+        required: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "input-group mb-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -66064,7 +66064,7 @@ function (_Component) {
         placeholder: "Password",
         "aria-label": "Password",
         "aria-describedby": "basic-addon1",
-        required: ""
+        required: true
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         class: "row border-top border-secondary"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
