@@ -17,33 +17,39 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::group(['middleware'=>'auth:api'],function(){
-    Route::get('category','Api\CategoryController@Index');
+    // Route::get('category','Api\CategoryController@Index');
     Route::post('category/store','Api\CategoryController@store');
     Route::delete('category/delete/{id}','Api\CategoryController@destroy');
     Route::get('category/edit/{id}','Api\CategoryController@edit');
     Route::put('category/update/{id}','Api\CategoryController@update');
 
-    Route::get('berita','Api\BeritaController@Index');
+    // Route::get('berita','Api\BeritaController@Index');
     Route::post('berita/store','Api\BeritaController@store');
     Route::delete('berita/delete/{id}','Api\BeritaController@destroy');
     Route::get('berita/edit/{id}','Api\BeritaController@edit');
     Route::post('berita/update/{id}','Api\BeritaController@update');
+    // Route::get('penduduk','Api\PendudukController@Index');
+
+    Route::post('penduduk/store','Api\PendudukController@store');
+    Route::delete('penduduk/delete/{id}','Api\PendudukController@destroy');
+    Route::get('penduduk/edit/{id}','Api\PendudukController@edit');
+    Route::post('penduduk/update/{id}','Api\PendudukController@update');
 });
 
 Route::get('category','Api\CategoryController@Index');
-Route::post('category/store','Api\CategoryController@store');
-Route::delete('category/delete/{id}','Api\CategoryController@destroy');
-Route::get('category/edit/{id}','Api\CategoryController@edit');
-Route::put('category/update/{id}','Api\CategoryController@update');
+// Route::post('category/store','Api\CategoryController@store');
+// Route::delete('category/delete/{id}','Api\CategoryController@destroy');
+// Route::get('category/edit/{id}','Api\CategoryController@edit');
+// Route::put('category/update/{id}','Api\CategoryController@update');
 
 Route::get('berita','Api\BeritaController@Index');
-Route::post('berita/store','Api\BeritaController@store');
-Route::delete('berita/delete/{id}','Api\BeritaController@destroy');
-Route::get('berita/edit/{id}','Api\BeritaController@edit');
-Route::post('berita/update/{id}','Api\BeritaController@update');
+// Route::post('berita/store','Api\BeritaController@store');
+// Route::delete('berita/delete/{id}','Api\BeritaController@destroy');
+// Route::get('berita/edit/{id}','Api\BeritaController@edit');
+// Route::post('berita/update/{id}','Api\BeritaController@update');
 
 Route::get('penduduk','Api\PendudukController@Index');
-Route::post('penduduk/store','Api\PendudukController@store');
-Route::delete('penduduk/delete/{id}','Api\PendudukController@destroy');
-Route::get('penduduk/edit/{id}','Api\PendudukController@edit');
-Route::post('penduduk/update/{id}','Api\PendudukController@update');
+// Route::post('penduduk/store','Api\PendudukController@store');
+// Route::delete('penduduk/delete/{id}','Api\PendudukController@destroy');
+// Route::get('penduduk/edit/{id}','Api\PendudukController@edit');
+// Route::post('penduduk/update/{id}','Api\PendudukController@update');

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Berita;
-
+use App\Http\Requests\BeritaRequest;
 class BeritaController extends Controller
 {
     /**
@@ -36,8 +36,10 @@ class BeritaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BeritaRequest $request)
     {
+        
+        return response()->json(['data'=>'fakkk']);
         $berita = new Berita();
         if (isset($request->gambar))
         {
@@ -53,7 +55,7 @@ class BeritaController extends Controller
         // $berita->isi = $request->isi;
         $berita->fill([
             'user_id' => 1,
-            'user_update' => 1,
+            // 'user_update' => 1,
             'judul' => $request->judul,
             'isi' => $request->isi
         ]);
@@ -81,6 +83,7 @@ class BeritaController extends Controller
      */
     public function edit(Response $res,$id)
     {
+        // return response()->json(['data'=>$res]);
         $berita = Berita::find($id);
         $data = array();
         if($berita==null){
@@ -99,8 +102,9 @@ class BeritaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BeritaRequest $request, $id)
     {
+        // dd($request->user());
         $berita = Berita::find($id);
         if(is_object($request->foto)){
             
@@ -116,7 +120,7 @@ class BeritaController extends Controller
         }
         $berita->foto = $newName;
         $berita->fill([
-            'user_update' => 1,
+            'user_update' => $request->user()->id,
             'judul' => $request->judul,
             'isi' => $request->isi
         ]);

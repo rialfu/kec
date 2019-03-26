@@ -1,66 +1,70 @@
 import React, { Component } from 'react';
 import Axios from 'axios'
 export default class Login extends Component{
-    constructor(){
-        super()
-        this.onSubmit =
-        this.onSubmit.bind(this);
+    constructor(props){
+        super(props)
+        this.onSubmit =this.onSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.state = {
-            email:'',
-            pasword:''
+            email:'sa-admin@test.com',
+            password:'12345'
+        }
+    }
+    handleChange(e){
+        console.log(JSON.parse(window.localStorage.getItem('authUser'))['access_token'])
+        if(e.target.name=='email'){
+            this.setState({email: e.target.value});
+        }else if(e.target.name='password'){
+            this.setState({password: e.target.value});
         }
     }
     onSubmit(e){
         e.preventDefault()
-        if(this.login.email=='' && this.login.password==''){
+        if(this.state.email=='' || this.state.password==''){
             return console.log('kosong') 
-          }
+        }
           const postData={
             grant_type:'password',
             client_id:'2',
-            client_secret:'VLyMXivmMxSJAMY60VJb9pNoT1co1vdikKe7EgAk',
+            client_secret:'mkFvhWvf0opRhdKurumskDUwlb65nDbfyOG7wn76',
             username:this.state.email,
             password:this.state.password,
             scope:''
                
           }
-          const authUser={}
-          axios.post('http://localhost:8000/oauth/token', postData).then(
+        const authUser={}
+        axios.post('http://localhost:8000/oauth/token', postData).then(
             res=>{
               if(res.status===200){
-                // console.log(res.data)
                 authUser.access_token=res.data.access_token
                 authUser.refresh_token=res.data.refresh_token
                 window.localStorage.setItem('authUser',JSON.stringify(authUser))
                 const header ={
-                    'Accept':'application/json',
+                    'Content-Type':'application/json',
                     'Authorization':'Bearer '+ res.data.access_token
                 }
-                axios.get('http://localhost:8000/api/user', {headers:header()})
+                axios.get('http://localhost:8000/api/user', {headers:header})
                 .then(res=>{
-                  // console.log('user',res)
                   authUser.email=res.data.email
                   authUser.name=res.data.name
                   window.localStorage.setItem('authUser', JSON.stringify(authUser))
-                  
-                  
                 })
                 .catch(err=>console.log('error'))
               }
-              if(res.status===401){
-                console.log('gk diizinkan')
-              }
+            //   if(res.status===401){
+            //     console.log('gk diizinkan')
+            //   }
             }
           ).catch(err=>{
             if(err.response.status===401){
-              this.alert=true
-              this.message='Your email or password is wrong'
+            //   console.log(err.response)
+              console.log('Your email or password is wrong')
             }
             if(err.response.status===500){
-              this.alert=true
-              this.message='server has been problem'
+              
+              console.log('server has been problem')
             }
-            console.log(err.response.status)
+            console.log(err)
     
           })
         
@@ -68,7 +72,12 @@ export default class Login extends Component{
     render(){
         return(
           <>
-          <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
+            {/* <div>
+                <form>
+                    <input type="text"placeholder="input" onChange={this.handleChange} name="email"value={this.state.email}/>    
+                </form>
+            </div> */}
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
             <div class="auth-box bg-dark border-top border-secondary">
                 <div id="loginform">
                     <div class="text-center p-t-20 p-b-20">
@@ -81,13 +90,13 @@ export default class Login extends Component{
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-lg" name="email" value={this.state.email} placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required/>
+                                    <input type="text" class="form-control form-control-lg" name="email" value={this.state.email}  onChange={this.handleChange}placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required/>
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
                                     </div>
-                                    <input type="text" name="password" value={this.state.email} class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required/>
+                                    <input type="password" name="password" value={this.state.password}  onChange={this.handleChange} class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required/>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +135,7 @@ export default class Login extends Component{
                 </div>
             </div>
         </div>
-            <div class="text-center">
+            {/* <div class="text-center">
             <hr/>
             <form onSubmit={this.onSubmit}>
             <h1 class="h3 mb-3 font-weight-normal">Login</h1>
@@ -141,7 +150,7 @@ export default class Login extends Component{
                 <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
             </form>
             
-            </div>
+            </div> */}
           </>
         );
     }

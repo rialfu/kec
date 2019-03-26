@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Header from './Header';
 import Footer from './Footer';
 import Login from './Login';
+import Daftar from './Daftar'
 import {BrowserRouter as Router, Route,Switch} from 'react-router-dom';
 
 export default class Index extends Component {
@@ -12,6 +13,7 @@ export default class Index extends Component {
             <Switch>
             <Route exact path="/login" component={Login}></Route>
             <Route path="/" component={Header}></Route>
+            <Route path="/daftar" component={Daftar}></Route>
             </Switch>
             </div>
         );

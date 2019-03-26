@@ -49,23 +49,32 @@ export default class Add extends Component {
         e.preventDefault();
         this.getinner('isi','.ql-editor');
         var rr = new FormData();
-        console.log(this.state.formValues);
+        // console.log(this.state.formValues);
         for(let [key, value] of Object.entries(this.state.formValues)){
             if(key=="gambar")
             rr.append(key,value,value.name);
             else
             rr.append(key,value);
         }
-        // console.log(JSON.stringify(rr));
-        axios.post('/api/berita/store',rr)
+        
+        const token = JSON.parse(window.localStorage.getItem('authUser'))
+        const header ={
+            'Accept':'application/json',
+            'Authorization':'Bearer '+ token.access_token
+        }
+        axios.post('/api/berita/store',rr,{headers:header})
+
+        // axios.post('/api/berita/store',rr)
         .then(
             res=>{
+                console.log(res)
                 this.setState({
                     alert_message:"success"
                 });
             }
         ).catch(
             error=>{
+                console.log(error.response.data.errors)//message validation
                 this.setState({
                     alert_message:"error"
                 });

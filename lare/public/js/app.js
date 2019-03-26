@@ -65151,13 +65151,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * a simple convenience so we don't have to attach every token manually.
  */
 
-var token = document.head.querySelector('meta[name="csrf-token"]');
+var token = document.head.querySelector('meta[name="csrf-token"]'); // if (token) {
+//     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+// } else {
+//     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+// }
 
-if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-}
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -65225,6 +65224,63 @@ function (_Component) {
   }]);
 
   return About;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Daftar.js":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Daftar.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Daftar; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Daftar =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Daftar, _Component);
+
+  function Daftar() {
+    _classCallCheck(this, Daftar);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Daftar).apply(this, arguments));
+  }
+
+  _createClass(Daftar, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Halo"));
+    }
+  }]);
+
+  return Daftar;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
@@ -65826,7 +65882,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Header */ "./resources/js/components/Header.js");
 /* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Footer */ "./resources/js/components/Footer.js");
 /* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Login */ "./resources/js/components/Login.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _Daftar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Daftar */ "./resources/js/components/Daftar.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -65844,6 +65901,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -65870,13 +65928,16 @@ function (_Component) {
         id: "main-wrapper",
         "data-sidebartype": "full",
         class: ""
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Route"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
         exact: true,
         path: "/login",
         component: _Login__WEBPACK_IMPORTED_MODULE_4__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Route"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
         path: "/",
         component: _Header__WEBPACK_IMPORTED_MODULE_2__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["Route"], {
+        path: "/daftar",
+        component: _Daftar__WEBPACK_IMPORTED_MODULE_5__["default"]
       })));
     }
   }]);
@@ -65887,7 +65948,7 @@ function (_Component) {
 
 
 if (document.getElementById('app')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Index, null)), document.getElementById('app'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Index, null)), document.getElementById('app'));
 }
 
 /***/ }),
@@ -65932,35 +65993,49 @@ var Login =
 function (_Component) {
   _inherits(Login, _Component);
 
-  function Login() {
+  function Login(props) {
     var _this;
 
     _classCallCheck(this, Login);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Login).call(this));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Login).call(this, props));
     _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.state = {
-      email: '',
-      pasword: ''
+      email: 'sa-admin@test.com',
+      password: '12345'
     };
     return _this;
   }
 
   _createClass(Login, [{
+    key: "handleChange",
+    value: function handleChange(e) {
+      console.log(JSON.parse(window.localStorage.getItem('authUser'))['access_token']);
+
+      if (e.target.name == 'email') {
+        this.setState({
+          email: e.target.value
+        });
+      } else if (e.target.name = 'password') {
+        this.setState({
+          password: e.target.value
+        });
+      }
+    }
+  }, {
     key: "onSubmit",
     value: function onSubmit(e) {
-      var _this2 = this;
-
       e.preventDefault();
 
-      if (this.login.email == '' && this.login.password == '') {
+      if (this.state.email == '' || this.state.password == '') {
         return console.log('kosong');
       }
 
       var postData = {
         grant_type: 'password',
         client_id: '2',
-        client_secret: 'VLyMXivmMxSJAMY60VJb9pNoT1co1vdikKe7EgAk',
+        client_secret: 'mkFvhWvf0opRhdKurumskDUwlb65nDbfyOG7wn76',
         username: this.state.email,
         password: this.state.password,
         scope: ''
@@ -65968,41 +66043,37 @@ function (_Component) {
       var authUser = {};
       axios.post('http://localhost:8000/oauth/token', postData).then(function (res) {
         if (res.status === 200) {
-          // console.log(res.data)
           authUser.access_token = res.data.access_token;
           authUser.refresh_token = res.data.refresh_token;
           window.localStorage.setItem('authUser', JSON.stringify(authUser));
           var header = {
-            'Accept': 'application/json',
+            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + res.data.access_token
           };
           axios.get('http://localhost:8000/api/user', {
-            headers: header()
+            headers: header
           }).then(function (res) {
-            // console.log('user',res)
             authUser.email = res.data.email;
             authUser.name = res.data.name;
             window.localStorage.setItem('authUser', JSON.stringify(authUser));
           }).catch(function (err) {
             return console.log('error');
           });
-        }
+        } //   if(res.status===401){
+        //     console.log('gk diizinkan')
+        //   }
 
-        if (res.status === 401) {
-          console.log('gk diizinkan');
-        }
       }).catch(function (err) {
         if (err.response.status === 401) {
-          _this2.alert = true;
-          _this2.message = 'Your email or password is wrong';
+          //   console.log(err.response)
+          console.log('Your email or password is wrong');
         }
 
         if (err.response.status === 500) {
-          _this2.alert = true;
-          _this2.message = 'server has been problem';
+          console.log('server has been problem');
         }
 
-        console.log(err.response.status);
+        console.log(err);
       });
     }
   }, {
@@ -66043,6 +66114,7 @@ function (_Component) {
         class: "form-control form-control-lg",
         name: "email",
         value: this.state.email,
+        onChange: this.handleChange,
         placeholder: "Username",
         "aria-label": "Username",
         "aria-describedby": "basic-addon1",
@@ -66057,9 +66129,10 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         class: "ti-pencil"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
+        type: "password",
         name: "password",
-        value: this.state.email,
+        value: this.state.password,
+        onChange: this.handleChange,
         class: "form-control form-control-lg",
         placeholder: "Password",
         "aria-label": "Password",
@@ -66121,39 +66194,7 @@ function (_Component) {
         class: "btn btn-info float-right",
         type: "button",
         name: "action"
-      }, "Recover")))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        class: "text-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.onSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        class: "h3 mb-3 font-weight-normal"
-      }, "Login"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        for: "inputEmail",
-        class: "sr-only"
-      }, "Email address"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "email",
-        type: "email",
-        id: "inputEmail",
-        value: this.state.email,
-        class: "form-control",
-        placeholder: "Email address"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        for: "inputPassword",
-        class: "sr-only"
-      }, "Password"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        name: "password",
-        type: "password",
-        id: "inputPassword",
-        value: this.state.password,
-        class: "form-control",
-        placeholder: "Password",
-        required: true
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        class: "btn btn-lg btn-primary btn-block",
-        type: "submit"
-      }, "Login"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        class: "mt-5 mb-3 text-muted"
-      }, "\xA9 2018"))));
+      }, "Recover")))))))));
     }
   }]);
 
@@ -66271,8 +66312,7 @@ function (_Component) {
 
       e.preventDefault();
       this.getinner('isi', '.ql-editor');
-      var rr = new FormData();
-      console.log(this.state.formValues);
+      var rr = new FormData(); // console.log(this.state.formValues);
 
       var _arr = Object.entries(this.state.formValues);
 
@@ -66282,14 +66322,25 @@ function (_Component) {
             value = _arr$_i[1];
 
         if (key == "gambar") rr.append(key, value, value.name);else rr.append(key, value);
-      } // console.log(JSON.stringify(rr));
+      }
 
+      var token = JSON.parse(window.localStorage.getItem('authUser'));
+      var header = {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + token.access_token
+      };
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/berita/store', rr, {
+        headers: header
+      }) // axios.post('/api/berita/store',rr)
+      .then(function (res) {
+        console.log(res);
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/berita/store', rr).then(function (res) {
         _this3.setState({
           alert_message: "success"
         });
       }).catch(function (error) {
+        console.log(error.response.data.errors); //message validation
+
         _this3.setState({
           alert_message: "error"
         });
@@ -68244,8 +68295,8 @@ function (_Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\kec\lare\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\kec\lare\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! c:\xampp\htdocs\kec\lare\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! c:\xampp\htdocs\kec\lare\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

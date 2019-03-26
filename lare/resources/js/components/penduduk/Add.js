@@ -61,8 +61,7 @@ export default class Add extends Component {
             else rr.append(key, value);
         }
         // console.log(JSON.stringify(rr));
-        axios
-            .post("/api/penduduk/store", rr)
+        axios.post("/api/penduduk/store", rr)
             .then(res =>
                 this.setState({
                     alert_message: "success"
